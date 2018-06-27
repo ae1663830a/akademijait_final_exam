@@ -8,8 +8,9 @@ public interface OrderService {
 
     Order getOrder(Long clientId);
     Page<Order> findAllOrders(Pageable pageable);
-    Order createOrder(Order client);
-    void deleteOrder(Long clientId);
-    void updateOrder(Long clientId, Order client);
-//    void addOrder(OrderOrder clientOrder);
+    Order createOrder(Order order);
+    void deleteOrder(Long orderId);
+    void updateOrder(Long orderId, Order client);
+    void addDish(Long orderId, String dishId);
+    void removeDish(Long orderId, String dishId);
 }

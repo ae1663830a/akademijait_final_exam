@@ -1,7 +1,9 @@
 package lt.akademija.andrejo.service.implementations;
 
+import lt.akademija.andrejo.domain.Dish;
 import lt.akademija.andrejo.domain.Order;
 import lt.akademija.andrejo.repository.OrderRepository;
+import lt.akademija.andrejo.service.DishService;
 import lt.akademija.andrejo.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,6 +15,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     OrderRepository orderRepository;
+
+    @Autowired
+    DishService dishService;
 
     @Override
     public Order getOrder(Long clientId) {
@@ -37,5 +42,21 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public void updateOrder(Long clientId, Order client) {
         orderRepository.save(client);
+    }
+
+    @Override
+    public void addDish(Long orderId, String dishId) {
+        Dish dish = dishService.getDish(dishId);
+        Order order = orderRepository.getOne(orderId);
+        order.getDishes().add(dish);
+        orderRepository.save(order);
+    }
+
+    @Override
+    public void removeDish(Long orderId, String dishId) {
+        Dish dish = dishService.getDish(dishId);
+        Order order = orderRepository.getOne(orderId);
+        order.getDishes().remove(dish);
+        orderRepository.save(order);
     }
 }

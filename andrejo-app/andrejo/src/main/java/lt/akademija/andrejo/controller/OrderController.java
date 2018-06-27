@@ -50,4 +50,20 @@ public class OrderController {
         return orderService.createOrder(order);
     }
 
+    @ApiOperation(value = "Add order to client", notes = "Adds order to client")
+    @PostMapping(value = "/{clientId}/add")
+    @ResponseStatus(HttpStatus.OK)
+    public void addDish(@PathVariable("clientId") final Long clientId,
+                            @RequestParam final String orderId) {
+        orderService.addDish(clientId, orderId);
+    }
+
+    @ApiOperation(value = "Delete dish from menu", notes = "Deletes dish from menu")
+    @DeleteMapping(value = "/{menuId}/delete")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteDish(@PathVariable("menuId") final Long orderId,
+                               @RequestParam("dishId") final String dishId) {
+        orderService.removeDish(orderId, dishId);
+    }
+
 }

@@ -52,18 +52,18 @@ public class ClientController {
     }
 
     @ApiOperation(value = "Add order to client", notes = "Adds order to client")
-    @PostMapping(value = "/{clientId}/add}")
+    @PostMapping(value = "/{clientId}/add")
     @ResponseStatus(HttpStatus.OK)
-    public void addProvider(@PathVariable("clientId") final Long menuId,
-                            @RequestBody final Order dishId) {
-        clientService.addOrder(menuId, dishId);
+    public void addProvider(@PathVariable("clientId") final Long clientId,
+                            @RequestBody final Long orderId) {
+        clientService.addOrder(clientId, orderId);
     }
 
     @ApiOperation(value = "Delete dish from menu", notes = "Deletes dish from menu")
     @DeleteMapping(value = "/{menuId}/delete/{dishId}")
     @ResponseStatus(HttpStatus.OK)
     public void deleteProvider(@PathVariable("menuId") final Long menuId,
-                               @PathVariable("dishId") final Long dishId) {
-        clientService.removeOrder(menuId, dishId);
+                               @PathVariable("dishId") final Long orderId) {
+        clientService.removeOrder(menuId, orderId);
     }
 }
