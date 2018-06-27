@@ -53,10 +53,10 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public void addOrder(Long id, Order order) {
+    public void addOrder(Long id, Long orderId) {
         Client client = clientRepository.getOne(id);
+        Order order = orderService.getOrder(orderId);
         client.getOrders().add(order);
-
         clientRepository.save(client);
     }
 
