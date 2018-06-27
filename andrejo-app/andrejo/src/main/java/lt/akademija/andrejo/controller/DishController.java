@@ -25,27 +25,27 @@ public class DishController {
     private static final Logger logger = LoggerFactory.getLogger(ClientController.class);
 
     @GetMapping("/all")
-    @ApiOperation(value = "Returns all flights that are currently in the list")
+    @ApiOperation(value = "Returns all dishes that are currently in the list")
     @ResponseStatus(HttpStatus.OK)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "page", dataType = "integer", paramType = "query", value = "Results page you want to retrieve (0..N)"),
             @ApiImplicitParam(name = "size", dataType = "integer", paramType = "query", value = "Number of records per page."),
             @ApiImplicitParam(name = "sort", allowMultiple = true, dataType = "string", paramType = "query", value = "Sorting criteria in the format: property(,asc|desc). "
                     + "Default sort order is ascending. " + "Multiple sort criteria are supported.")})
-    public Page<DishDto> getClients(Pageable pageable) {
-        logger.info("Returns all clients");
+    public Page<DishDto> findAllDishs(Pageable pageable) {
+        logger.info("Returns all dishes");
         return dishService.findAllDishs(pageable);
     }
 
-    @ApiOperation(value = "Deletes client")
+    @ApiOperation(value = "Deletes dish")
     @DeleteMapping("/delete/{id}")
-    public void deleteClient(@PathVariable String id) {
+    public void deleteDish(@PathVariable String id) {
         dishService.deleteDish(id);
     }
 
-    @ApiOperation(value = "Registers client")
+    @ApiOperation(value = "Creates dish")
     @PostMapping("/create")
-    public DishDto registerClient(@RequestBody DishDto dishDto) {
+    public DishDto createDish(@RequestBody DishDto dishDto) {
         return dishService.createDish(dishDto);
     }
 

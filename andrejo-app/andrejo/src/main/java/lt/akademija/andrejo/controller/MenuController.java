@@ -18,7 +18,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/menu")
-@Api(value = "Services")
+@Api(value = "Menu")
 public class MenuController {
 
     @Autowired
@@ -36,38 +36,38 @@ public class MenuController {
         return menuService.findAllMenus(pageable);
     }
 
-    @ApiOperation(value = "Get one by name", notes = "Returns one menu by name")
+    @ApiOperation(value = "Get one by id", notes = "Returns one menu by id")
     @GetMapping(value = "/{name}")
     @ResponseStatus(HttpStatus.OK)
-    public Menu getService(@PathVariable final Long name) {
+    public Menu getMenu(@PathVariable final Long name) {
         return menuService.getMenu(name);
     }
 
     @ApiOperation(value = "Create menu", notes = "Creates menu")
     @PostMapping(value = "/new")
     @ResponseStatus(HttpStatus.OK)
-    public Menu createServices(@RequestBody @Valid final Menu menuDto) {
-        return menuService.createMenu(menuDto);
+    public Menu createMenu(@RequestBody @Valid final Menu menu) {
+        return menuService.createMenu(menu);
     }
 
     @ApiOperation(value = "Updates menu", notes = "Updates menu")
     @PutMapping(value = "/update/{name}")
     @ResponseStatus(HttpStatus.OK)
-    public void updateServices(@PathVariable("name") final Long name, @RequestBody @Valid final Menu menuDto) {
+    public void updateMenu(@PathVariable("name") final Long name, @RequestBody @Valid final Menu menuDto) {
         menuService.updateMenu(name, menuDto);
     }
 
     @ApiOperation(value = "Deletes menu", notes = "Deletes menu")
-    @DeleteMapping(value = "/delete/{name}")
+    @DeleteMapping(value = "/delete/{menuId}")
     @ResponseStatus(HttpStatus.OK)
-    public void deleteServices(@PathVariable("name") final Long name) {
+    public void deleteMenu(@PathVariable("menuId") final Long name) {
         menuService.deleteMenu(name);
     }
 
     @ApiOperation(value = "Add dish to menu", notes = "Adds dish to menu")
     @PostMapping(value = "/{menuId}/add/{dishId}")
     @ResponseStatus(HttpStatus.OK)
-    public void addProvider(@PathVariable("menuId") final Long menuId,
+    public void addDishToMenu(@PathVariable("menuId") final Long menuId,
                             @PathVariable("dishId") final String dishId) {
         menuService.addDishToMenu(menuId, dishId);
     }
@@ -75,7 +75,7 @@ public class MenuController {
     @ApiOperation(value = "Delete dish from menu", notes = "Deletes dish from menu")
     @DeleteMapping(value = "/{menuId}/delete/{dishId}")
     @ResponseStatus(HttpStatus.OK)
-    public void deleteProvider(@PathVariable("menuId") final Long menuId,
+    public void removeDishFromMenu(@PathVariable("menuId") final Long menuId,
                                @PathVariable("dishId") final String dishId) {
         menuService.removeDishFromMenu(menuId, dishId);
     }
@@ -88,7 +88,7 @@ public class MenuController {
             @ApiImplicitParam(name = "size", dataType = "integer", paramType = "query", value = "Number of records per page."),
             @ApiImplicitParam(name = "sort", allowMultiple = true, dataType = "string", paramType = "query", value = "Sorting criteria in the format: property(,asc|desc). "
                     + "Default sort order is ascending. " + "Multiple sort criteria are supported.")})
-    public List<Dish> getServiceProviders(@PathVariable("menuId") final Long menuId) {
+    public List<Dish> getDishesByMenu(@PathVariable("menuId") final Long menuId) {
         return menuService.getDishesByMenu(menuId);
     }
 }

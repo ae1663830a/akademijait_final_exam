@@ -25,6 +25,7 @@ public class Order implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     @JoinColumn(name = "client_id", referencedColumnName = "id")
+    @JsonIgnore
     private Client client;
 
     @OneToMany

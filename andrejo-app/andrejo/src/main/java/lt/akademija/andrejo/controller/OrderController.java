@@ -33,35 +33,35 @@ public class OrderController {
             @ApiImplicitParam(name = "size", dataType = "integer", paramType = "query", value = "Number of records per page."),
             @ApiImplicitParam(name = "sort", allowMultiple = true, dataType = "string", paramType = "query", value = "Sorting criteria in the format: property(,asc|desc). "
                     + "Default sort order is ascending. " + "Multiple sort criteria are supported.")})
-    public Page<Order> getClients(Pageable pageable) {
-        logger.info("Returns all clients");
+    public Page<Order> findAllOrders(Pageable pageable) {
+        logger.info("Returns all orders");
         return orderService.findAllOrders(pageable);
     }
 
     @ApiOperation(value = "Deletes order")
     @DeleteMapping("/delete/{id}")
-    public void deleteClient(@PathVariable Long id) {
+    public void deleteOrder(@PathVariable Long id) {
         orderService.deleteOrder(id);
     }
 
-    @ApiOperation(value = "Registers order")
+    @ApiOperation(value = "Create order")
     @PostMapping("/create")
-    public Order registerClient(@RequestBody Order order) {
+    public Order createOrder(@RequestBody Order order) {
         return orderService.createOrder(order);
     }
 
-    @ApiOperation(value = "Add order to client", notes = "Adds order to client")
-    @PostMapping(value = "/{clientId}/add")
+    @ApiOperation(value = "Add dish to order", notes = "Adds dish to order")
+    @PostMapping(value = "/{orderId}/add")
     @ResponseStatus(HttpStatus.OK)
-    public void addDish(@PathVariable("clientId") final Long clientId,
-                            @RequestParam final String orderId) {
-        orderService.addDish(clientId, orderId);
+    public void addDish(@PathVariable("orderId") final Long orderId,
+                            @RequestParam final String dishId) {
+        orderService.addDish(orderId, dishId);
     }
 
-    @ApiOperation(value = "Delete dish from menu", notes = "Deletes dish from menu")
-    @DeleteMapping(value = "/{menuId}/delete")
+    @ApiOperation(value = "Delete dish from order", notes = "Deletes dish from order")
+    @DeleteMapping(value = "/{orderId}/delete")
     @ResponseStatus(HttpStatus.OK)
-    public void deleteDish(@PathVariable("menuId") final Long orderId,
+    public void deleteDish(@PathVariable("orderId") final Long orderId,
                                @RequestParam("dishId") final String dishId) {
         orderService.removeDish(orderId, dishId);
     }

@@ -1,5 +1,6 @@
 package lt.akademija.andrejo.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -37,6 +38,7 @@ public class Client implements Serializable {
     private boolean milkAlergy;
 
     @OneToMany(mappedBy = "client", orphanRemoval = true)
+    @JsonIgnore
     private List<Order> orders = new ArrayList<>();
 
     void addOrder(Order order) {

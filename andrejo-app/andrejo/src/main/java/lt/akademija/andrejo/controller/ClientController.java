@@ -4,7 +4,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import lt.akademija.andrejo.domain.Order;
 import lt.akademija.andrejo.domain.dto.ClientDto;
 import lt.akademija.andrejo.service.ClientService;
 import org.slf4j.Logger;
@@ -54,16 +53,16 @@ public class ClientController {
     @ApiOperation(value = "Add order to client", notes = "Adds order to client")
     @PostMapping(value = "/{clientId}/add")
     @ResponseStatus(HttpStatus.OK)
-    public void addProvider(@PathVariable("clientId") final Long clientId,
+    public void addOrder(@PathVariable("clientId") final Long clientId,
                             @RequestBody final Long orderId) {
         clientService.addOrder(clientId, orderId);
     }
 
-    @ApiOperation(value = "Delete dish from menu", notes = "Deletes dish from menu")
-    @DeleteMapping(value = "/{menuId}/delete/{dishId}")
+    @ApiOperation(value = "Delete order from client", notes = "Delete order from client")
+    @DeleteMapping(value = "/{clientId}/delete")
     @ResponseStatus(HttpStatus.OK)
-    public void deleteProvider(@PathVariable("menuId") final Long menuId,
-                               @PathVariable("dishId") final Long orderId) {
+    public void removeOrder(@PathVariable("clientId") final Long menuId,
+                               @RequestParam("orderId") final Long orderId) {
         clientService.removeOrder(menuId, orderId);
     }
 }
