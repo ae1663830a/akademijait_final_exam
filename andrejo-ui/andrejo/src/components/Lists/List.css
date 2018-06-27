@@ -1,0 +1,12 @@
+th, td, tr {
+text-align: center  !important;
+padding: 0 !important;
+padding-bottom: 5px !important;
+padding-top: 5px !important;
+margin: 0 !important;
+vertical-align: middle !important;
+}
+
+.tableList {
+    min-height: 268px;
+}
