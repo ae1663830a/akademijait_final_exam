@@ -9,9 +9,6 @@ import javax.validation.constraints.NotNull;
  * @author ggrazevicius
  */
 @Entity
-@NamedQueries({
-        @NamedQuery(name = "findAllClients", query = "select client from Client client")
-})
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
