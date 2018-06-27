@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import lt.akademija.andrejo.domain.Dish;
 import org.springframework.beans.BeanUtils;
 
 
@@ -16,20 +17,20 @@ public class DishDto {
     private boolean hasNuts;
     private boolean hasMilk;
 
-    public static DishDto toDto(DishDto dish) {
+    public static DishDto toDto(Dish dish) {
         DishDto dto = new DishDto();
         BeanUtils.copyProperties(dish, dto);
         return dto;
     }
 
-    public static DishDto fromDto(DishDto dishDto) {
-        DishDto dish = new DishDto();
+    public static Dish fromDto(DishDto dishDto) {
+        Dish dish = new Dish();
         BeanUtils.copyProperties(dishDto, dish);
         return dish;
     }
 
-    public static DishDto updateFromDto(DishDto dishDto) {
-        DishDto dish = new DishDto();
+    public static Dish updateFromDto(DishDto dishDto) {
+        Dish dish = new Dish();
         dish.setName(dishDto.getName());
         dish.setHasMilk(dishDto.isHasMilk());
         dish.setHasNuts(dishDto.isHasNuts());
