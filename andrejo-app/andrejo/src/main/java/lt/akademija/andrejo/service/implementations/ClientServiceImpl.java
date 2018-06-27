@@ -33,8 +33,15 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public ClientDto createClient(ClientDto clientDto) {
-        clientRepository.save(ClientDto.fromDto(clientDto));
-        return clientDto;
+        Client client = clientRepository.findByFirstNameAndLastName(clientDto.getFirstName(), clientDto.getLastName());
+        if (client == null) {
+            clientRepository.save(ClientDto.fromDto(clientDto));
+            return clientDto;
+        } else {
+            // TODO add error message
+            return new ClientDto();
+        }
+
     }
 
     @Override
