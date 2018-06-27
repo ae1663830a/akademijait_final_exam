@@ -1,5 +1,6 @@
-package lt.akademija.andrejo.client;
+package lt.akademija.andrejo.repository;
 
+import lt.akademija.andrejo.domain.Client;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 

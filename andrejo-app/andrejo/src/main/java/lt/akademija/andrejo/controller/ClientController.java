@@ -1,6 +1,8 @@
-package lt.akademija.andrejo.client;
+package lt.akademija.andrejo.controller;
 
 import io.swagger.annotations.ApiOperation;
+import lt.akademija.andrejo.repository.ClientRepository;
+import lt.akademija.andrejo.domain.Client;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
