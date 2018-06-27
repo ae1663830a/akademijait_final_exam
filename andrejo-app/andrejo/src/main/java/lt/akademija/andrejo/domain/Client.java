@@ -36,14 +36,14 @@ public class Client implements Serializable {
     @NotNull
     private boolean milkAlergy;
 
-    @OneToMany
-    private List<ClientOrder> clientOrders = new ArrayList<>();
+    @OneToMany(mappedBy = "client", orphanRemoval = true)
+    private List<Order> orders = new ArrayList<>();
 
-    void addOrder(ClientOrder clientOrder) {
-        clientOrders.add(clientOrder);
+    void addOrder(Order order) {
+        orders.add(order);
     }
 
-    void removeOrder(ClientOrder clientOrder) {
-        clientOrders.remove(clientOrder);
+    void removeOrder(Order order) {
+        orders.remove(order);
     }
 }

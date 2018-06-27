@@ -1,6 +1,6 @@
 package lt.akademija.andrejo.service.implementations;
 
-import lt.akademija.andrejo.domain.ClientOrder;
+import lt.akademija.andrejo.domain.Order;
 import lt.akademija.andrejo.repository.OrderRepository;
 import lt.akademija.andrejo.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,17 +15,17 @@ public class OrderServiceImpl implements OrderService {
     OrderRepository orderRepository;
 
     @Override
-    public ClientOrder getOrder(Long clientId) {
+    public Order getOrder(Long clientId) {
         return orderRepository.getOne(clientId);
     }
 
     @Override
-    public Page<ClientOrder> findAllOrders(Pageable pageable) {
+    public Page<Order> findAllOrders(Pageable pageable) {
         return orderRepository.findAll(pageable);
     }
 
     @Override
-    public ClientOrder createOrder(ClientOrder client) {
+    public Order createOrder(Order client) {
         return orderRepository.save(client);
     }
 
@@ -35,7 +35,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void updateOrder(Long clientId, ClientOrder client) {
+    public void updateOrder(Long clientId, Order client) {
         orderRepository.save(client);
     }
 }

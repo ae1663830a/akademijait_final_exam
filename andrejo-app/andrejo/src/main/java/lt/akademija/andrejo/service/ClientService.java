@@ -1,7 +1,7 @@
 package lt.akademija.andrejo.service;
 
 import lt.akademija.andrejo.domain.Client;
-import lt.akademija.andrejo.domain.ClientOrder;
+import lt.akademija.andrejo.domain.Order;
 import lt.akademija.andrejo.domain.dto.ClientDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,7 +13,7 @@ public interface ClientService {
     ClientDto createClient(ClientDto client);
     void deleteClient(Long clientId);
     void updateClient(Long clientId, ClientDto client);
-    void addOrder(Long clientId, ClientOrder clientOrder);
-    void removeOrder(Long clientId, ClientOrder clientOrder);
+    void addOrder(Long clientId, Order order);
+    void removeOrder(Long clientId, Long orderId);
 
 }

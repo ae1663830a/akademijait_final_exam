@@ -4,6 +4,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import lt.akademija.andrejo.domain.Order;
 import lt.akademija.andrejo.domain.dto.ClientDto;
 import lt.akademija.andrejo.service.ClientService;
 import org.slf4j.Logger;
@@ -26,7 +27,7 @@ public class ClientController {
     private static final Logger logger = LoggerFactory.getLogger(ClientController.class);
 
     @GetMapping("/all")
-    @ApiOperation(value = "Returns all flights that are currently in the list")
+    @ApiOperation(value = "Returns all clients that are currently in the list")
     @ResponseStatus(HttpStatus.OK)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "page", dataType = "integer", paramType = "query", value = "Results page you want to retrieve (0..N)"),
@@ -48,5 +49,21 @@ public class ClientController {
     @PostMapping("/register")
     public ClientDto registerClient(@RequestBody ClientDto clientDto) {
         return clientService.createClient(clientDto);
+    }
+
+    @ApiOperation(value = "Add order to client", notes = "Adds order to client")
+    @PostMapping(value = "/{clientId}/add}")
+    @ResponseStatus(HttpStatus.OK)
+    public void addProvider(@PathVariable("clientId") final Long menuId,
+                            @RequestBody final Order dishId) {
+        clientService.addOrder(menuId, dishId);
+    }
+
+    @ApiOperation(value = "Delete dish from menu", notes = "Deletes dish from menu")
+    @DeleteMapping(value = "/{menuId}/delete/{dishId}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteProvider(@PathVariable("menuId") final Long menuId,
+                               @PathVariable("dishId") final Long dishId) {
+        clientService.removeOrder(menuId, dishId);
     }
 }

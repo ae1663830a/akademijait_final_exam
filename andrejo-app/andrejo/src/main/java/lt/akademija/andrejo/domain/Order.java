@@ -15,7 +15,7 @@ import java.util.List;
 @EqualsAndHashCode
 @ToString
 @Table(name = "client")
-public class ClientOrder implements Serializable {
+public class Order implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -23,7 +23,8 @@ public class ClientOrder implements Serializable {
     @GeneratedValue
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    @JoinColumn(name = "client_id", referencedColumnName = "id")
     private Client client;
 
     @OneToMany
