@@ -36,7 +36,7 @@ class ServiceForm extends Component {
                         {value: false, displayValue: 'NĖRA riešutų'},
                     ]
                 },
-                value: 'NO',
+                value: false,
                 validation: {
                     required: true
                 },
@@ -52,7 +52,7 @@ class ServiceForm extends Component {
 
                     ]
                 },
-                value: 'NO',
+                value: false,
                 validation: {
                     required: true
                 },
