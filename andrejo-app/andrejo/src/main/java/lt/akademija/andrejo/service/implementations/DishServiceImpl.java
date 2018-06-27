@@ -51,23 +51,4 @@ public class DishServiceImpl implements DishService {
             dishRepository.save(fromDto);
         }
     }
-
-    @Override
-    public void addToMenu(String dishId, Long menuId) {
-        Dish dish = dishRepository.getOne(dishId);
-        Menu menu = menuRepository.getOne(menuId);
-        menu.addDish(dish);
-        menuRepository.save(menu);
-        dishRepository.save(dish);
-    }
-
-    @Override
-    public void removeFromMenu(String dishId, Long menuId) {
-        Dish dish = dishRepository.getOne(dishId);
-        Menu menu = menuRepository.getOne(menuId);
-        menu.removeDish(dish);
-        dishRepository.save(dish);
-        menuRepository.save(menu);
-    }
-
 }

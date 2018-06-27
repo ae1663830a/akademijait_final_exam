@@ -49,19 +49,4 @@ public class DishController {
         return dishService.createDish(dishDto);
     }
 
-    @ApiOperation(value = "Add dish to menu", notes = "Add dish to menu")
-    @PostMapping(value = "/{dishId}/add/{menuId}")
-    @ResponseStatus(HttpStatus.OK)
-    public void addProvider(@PathVariable("dishId") final String serviceName,
-                            @PathVariable("menuId") final Long providerName) {
-        dishService.addToMenu(serviceName, providerName);
-    }
-
-    @ApiOperation(value = "Delete dish from menu", notes = "Deletes dish from menu")
-    @DeleteMapping(value = "/{dishId}/delete/{menuId}")
-    @ResponseStatus(HttpStatus.OK)
-    public void deleteProvider(@PathVariable("dishId") final String dishId,
-                               @PathVariable("menuId") final Long menuId) {
-        dishService.removeFromMenu(dishId, menuId);
-    }
 }

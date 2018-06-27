@@ -22,7 +22,7 @@ public class Dish implements Serializable {
     private boolean hasMilk;
 
     @ManyToOne
-    @JoinColumn(name = "in_menu")
+    @JoinColumn(name = "in_menu", referencedColumnName = "id")
     private Menu menu;
 
 }

@@ -12,6 +12,4 @@ public interface DishService {
     DishDto createDish(DishDto dish);
     void deleteDish(String dishId);
     void updateDish(String dishId, DishDto dish);
-    void addToMenu(String dishId, Long menuId);
-    void removeFromMenu(String dishId, Long menuId);
 }

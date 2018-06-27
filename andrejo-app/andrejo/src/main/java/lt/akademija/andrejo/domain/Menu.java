@@ -23,7 +23,7 @@ public class Menu implements Serializable {
     @GeneratedValue
     private Long id;
 
-    @OneToMany(mappedBy = "menu")
+    @OneToMany(mappedBy = "menu", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Dish> dishList = new ArrayList<>();
 
