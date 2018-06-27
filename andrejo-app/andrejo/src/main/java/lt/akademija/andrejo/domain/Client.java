@@ -4,6 +4,8 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author ggrazevicius
@@ -31,4 +33,14 @@ public class Client {
     @NotNull
     private boolean milkAlergy;
 
+    @OneToMany
+    private List<ClientOrder> clientOrders = new ArrayList<>();
+
+    void addOrder(ClientOrder clientOrder) {
+        clientOrders.add(clientOrder);
+    }
+
+    void removeOrder(ClientOrder clientOrder) {
+        clientOrders.remove(clientOrder);
+    }
 }
