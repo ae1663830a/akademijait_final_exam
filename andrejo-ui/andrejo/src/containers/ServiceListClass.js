@@ -9,8 +9,8 @@ class ServiceListClass extends Component {
     state = {
         pageSize: 8
     };
-    getUrl = 'api/services/all';
-    serviceDetailsURL = 'service/details/';
+    getUrl = 'api/orders/all';
+    serviceDetailsURL = 'order/details/';
 
     componentWillMount() {
         this.props.onCreationInit();
@@ -80,7 +80,6 @@ class ServiceListClass extends Component {
                     price={this.props.serviceListRedux.price}
                     category={this.props.serviceListRedux.category}
                     description={this.props.serviceListRedux.description}
-                    picture={this.props.serviceListRedux.picture}
                     clicked={this.showObjectDetails}
                 />
                 {pagination}

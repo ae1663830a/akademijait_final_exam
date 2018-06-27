@@ -49,7 +49,6 @@ class ServiceForm extends Component {
                     options: [
                         {value: true, displayValue: 'YRA pieno'},
                         {value: false, displayValue: 'NERA pieno'},
-
                     ]
                 },
                 value: false,
@@ -59,11 +58,11 @@ class ServiceForm extends Component {
                 valid: true,
                 isTouched: false
             },
-            formIsValid: true
-        }
+        },
+        formIsValid: true
     };
 
-    url = '/api/dishes/new';
+    url = '/api/dishes/create';
     updateURL = '/api/dishes/update';
     dishURL = 'api/dishes/';
 
