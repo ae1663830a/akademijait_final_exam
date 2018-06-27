@@ -63,7 +63,7 @@ public class ClientServiceImpl implements ClientService {
     public void addOrder(Long id, Long orderId) {
         Client client = clientRepository.getOne(id);
         Order order = orderService.getOrder(orderId);
-        client.getOrders().add(order);
+        client.addOrder(order);
         clientRepository.save(client);
     }
 
@@ -71,7 +71,7 @@ public class ClientServiceImpl implements ClientService {
     public void removeOrder(Long id, Long orderId) {
         Client client = clientRepository.getOne(id);
         Order order = orderService.getOrder(orderId);
-        client.getOrders().remove(order);
+        client.removeOrder(order);
         clientRepository.save(client);
     }
 }

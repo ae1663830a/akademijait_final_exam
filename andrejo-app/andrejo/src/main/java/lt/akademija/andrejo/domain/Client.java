@@ -41,11 +41,11 @@ public class Client implements Serializable {
     @JsonIgnore
     private List<Order> orders = new ArrayList<>();
 
-    void addOrder(Order order) {
+    public void addOrder(Order order) {
         orders.add(order);
     }
 
-    void removeOrder(Order order) {
+    public void removeOrder(Order order) {
         orders.remove(order);
     }
 }
