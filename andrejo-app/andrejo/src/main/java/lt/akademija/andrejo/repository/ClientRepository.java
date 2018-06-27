@@ -1,6 +1,7 @@
 package lt.akademija.andrejo.repository;
 
 import lt.akademija.andrejo.domain.Client;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,29 +13,6 @@ import java.util.List;
  * @author ggrazevicius
  */
 @Repository
-public class ClientRepository {
+public interface ClientRepository extends JpaRepository<Client, Long> {
 
-    @PersistenceContext
-    private EntityManager entityManager;
-
-
-    @Transactional(readOnly = true)
-    public Client get(Long id) {
-        return entityManager.find(Client.class, id);
-    }
-
-    @Transactional
-    public Client save(Client client) {
-        return entityManager.merge(client);
-    }
-
-    @Transactional
-    public void delete(Long id) {
-        entityManager.remove(entityManager.find(Client.class, id));
-    }
-
-    @Transactional(readOnly = true)
-    public List<Client> findAll() {
-        return entityManager.createNamedQuery("findAllClients").getResultList();
-    }
 }

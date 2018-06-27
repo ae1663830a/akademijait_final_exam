@@ -1,37 +1,52 @@
 package lt.akademija.andrejo.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import lt.akademija.andrejo.repository.ClientRepository;
-import lt.akademija.andrejo.domain.Client;
+import lt.akademija.andrejo.domain.dto.ClientDto;
+import lt.akademija.andrejo.service.ClientService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
+@RequestMapping("/api/clients")
+@Api(value = "Client")
 @RestController
 public class ClientController {
 
     @Autowired
-    private ClientRepository clientRepository;
+    private ClientService clientService;
 
     private static final Logger logger = LoggerFactory.getLogger(ClientController.class);
 
-    @GetMapping("/api/clients")
+    @GetMapping("/all")
     @ApiOperation(value = "Returns all flights that are currently in the list")
-    public List<Client> getClients() {
+    @ResponseStatus(HttpStatus.OK)
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "page", dataType = "integer", paramType = "query", value = "Results page you want to retrieve (0..N)"),
+            @ApiImplicitParam(name = "size", dataType = "integer", paramType = "query", value = "Number of records per page."),
+            @ApiImplicitParam(name = "sort", allowMultiple = true, dataType = "string", paramType = "query", value = "Sorting criteria in the format: property(,asc|desc). "
+                    + "Default sort order is ascending. " + "Multiple sort criteria are supported.") })
+    public Page<ClientDto> getClients(Pageable pageable) {
         logger.info("Returns all clients");
-        return clientRepository.findAll();
+        return clientService.findAllClients(pageable);
     }
 
+    @ApiOperation(value = "Deletes client")
     @DeleteMapping("/api/clients/{id}")
     public void deleteClient(@PathVariable Long id) {
-        clientRepository.delete(id);
+        clientService.deleteClient(id);
     }
 
+    @ApiOperation(value = "Registers client")
     @PostMapping("/api/clients")
-    public Client registerClient(@RequestBody Client client) {
-        return clientRepository.save(client);
+    public ClientDto registerClient(@RequestBody ClientDto clientDto) {
+        return clientService.createClient(clientDto);
     }
 }
