@@ -9,6 +9,6 @@ import org.springframework.data.repository.query.Param;
 
 public interface DishRepository extends JpaRepository<Dish, String> {
 
-    @Query("select distinct d from Dish d join d.menu m where m.id =:menuId")
+    @Query("select distinct d from Dish d join d.menus m where m.id =:menuId")
     Page<Dish> findByMenu(@Param("menuId") Long menuId, Pageable pageable);
 }

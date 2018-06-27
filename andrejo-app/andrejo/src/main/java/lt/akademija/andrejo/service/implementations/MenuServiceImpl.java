@@ -51,8 +51,8 @@ public class MenuServiceImpl implements MenuService {
         Dish dish = dishRepository.getOne(dishId);
         Menu menu = menuRepository.getOne(menuId);
         menu.addDish(dish);
-        menuRepository.save(menu);
         dishRepository.save(dish);
+        menuRepository.save(menu);
     }
 
     @Override
@@ -65,10 +65,8 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
-    public List<Dish> getDishesByMenu(Long serviceName) {
-
-        Menu menu = menuRepository.getOne(serviceName);
-        return menu.getDishList();
+    public Page<Dish> getDishesByMenu(Long serviceName, Pageable pageable) {
+        return dishRepository.findByMenu(serviceName, pageable);
 
     }
 }

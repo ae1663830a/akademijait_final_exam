@@ -1,9 +1,12 @@
 package lt.akademija.andrejo.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -21,8 +24,22 @@ public class Dish implements Serializable {
     private boolean hasNuts;
     private boolean hasMilk;
 
-    @ManyToOne
-    @JoinColumn(name = "in_menu", referencedColumnName = "id")
-    private Menu menu;
+    @ManyToMany
+    @JoinTable(
+            name = "menu_dish",
+            joinColumns=@JoinColumn(name = "dish", referencedColumnName = "name", nullable = false),
+            inverseJoinColumns = @JoinColumn(name = "menu", referencedColumnName = "id", nullable = false)
+    )
+    @JsonIgnore
+    private List<Menu> menus = new ArrayList<>();
+
+    @ManyToMany
+    @JoinTable(
+            name = "order_dish",
+            joinColumns=@JoinColumn(name = "dish", referencedColumnName = "name", nullable = false),
+            inverseJoinColumns = @JoinColumn(name = "order", referencedColumnName = "id", nullable = false)
+    )
+    @JsonIgnore
+    private List<Order> orders = new ArrayList<>();
 
 }

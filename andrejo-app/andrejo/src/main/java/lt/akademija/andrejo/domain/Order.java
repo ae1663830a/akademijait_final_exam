@@ -28,7 +28,12 @@ public class Order implements Serializable {
     @JsonIgnore
     private Client client;
 
-    @OneToMany
+    @ManyToMany
+    @JoinTable(
+            name = "order_dish",
+            joinColumns=@JoinColumn(name = "order", referencedColumnName = "id", nullable = false),
+            inverseJoinColumns = @JoinColumn(name = "dish", referencedColumnName = "name", nullable = false)
+    )
     @JsonIgnore
     private List<Dish> dishes = new ArrayList<>();
 

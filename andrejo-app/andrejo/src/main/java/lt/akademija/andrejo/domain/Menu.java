@@ -23,7 +23,12 @@ public class Menu implements Serializable {
     @GeneratedValue
     private Long id;
 
-    @OneToMany(mappedBy = "menu", cascade = CascadeType.ALL)
+    @ManyToMany
+    @JoinTable(
+            name = "menu_dish",
+            joinColumns=@JoinColumn(name = "menu", referencedColumnName = "id", nullable = false),
+            inverseJoinColumns = @JoinColumn(name = "dish", referencedColumnName = "name", nullable = false)
+    )
     @JsonIgnore
     private List<Dish> dishList = new ArrayList<>();
 
