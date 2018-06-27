@@ -1,8 +1,10 @@
 package lt.akademija.andrejo.service.implementations;
 
 import lt.akademija.andrejo.domain.Dish;
+import lt.akademija.andrejo.domain.Menu;
 import lt.akademija.andrejo.domain.dto.DishDto;
 import lt.akademija.andrejo.repository.DishRepository;
+import lt.akademija.andrejo.repository.MenuRepository;
 import lt.akademija.andrejo.service.DishService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -14,6 +16,9 @@ public class DishServiceImpl implements DishService {
 
     @Autowired
     DishRepository dishRepository;
+
+    @Autowired
+    MenuRepository menuRepository;
 
     @Override
     public Dish getDish(String dishId) {
@@ -28,8 +33,8 @@ public class DishServiceImpl implements DishService {
 
     @Override
     public DishDto createDish(DishDto dishDto) {
-       dishRepository.save(DishDto.fromDto(dishDto));
-       return dishDto;
+        dishRepository.save(DishDto.fromDto(dishDto));
+        return dishDto;
     }
 
     @Override
@@ -46,4 +51,23 @@ public class DishServiceImpl implements DishService {
             dishRepository.save(fromDto);
         }
     }
+
+    @Override
+    public void addToMenu(String dishId, Long menuId) {
+        Dish dish = dishRepository.getOne(dishId);
+        Menu menu = menuRepository.getOne(menuId);
+        menu.addDish(dish);
+        menuRepository.save(menu);
+        dishRepository.save(dish);
+    }
+
+    @Override
+    public void removeFromMenu(String dishId, Long menuId) {
+        Dish dish = dishRepository.getOne(dishId);
+        Menu menu = menuRepository.getOne(menuId);
+        menu.removeDish(dish);
+        dishRepository.save(dish);
+        menuRepository.save(menu);
+    }
+
 }

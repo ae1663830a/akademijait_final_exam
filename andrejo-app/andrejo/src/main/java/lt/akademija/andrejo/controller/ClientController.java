@@ -39,13 +39,13 @@ public class ClientController {
     }
 
     @ApiOperation(value = "Deletes client")
-    @DeleteMapping("/api/clients/{id}")
+    @DeleteMapping("/delete/{id}")
     public void deleteClient(@PathVariable Long id) {
         clientService.deleteClient(id);
     }
 
     @ApiOperation(value = "Registers client")
-    @PostMapping("/api/clients")
+    @PostMapping("/register")
     public ClientDto registerClient(@RequestBody ClientDto clientDto) {
         return clientService.createClient(clientDto);
     }

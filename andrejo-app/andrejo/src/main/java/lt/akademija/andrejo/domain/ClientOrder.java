@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +15,9 @@ import java.util.List;
 @EqualsAndHashCode
 @ToString
 @Table(name = "client")
-public class ClientOrder {
+public class ClientOrder implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue
@@ -26,4 +29,6 @@ public class ClientOrder {
     @OneToMany
     @JsonIgnore
     private List<Dish> dishes = new ArrayList<>();
+
+
 }

@@ -31,21 +31,37 @@ public class DishController {
             @ApiImplicitParam(name = "page", dataType = "integer", paramType = "query", value = "Results page you want to retrieve (0..N)"),
             @ApiImplicitParam(name = "size", dataType = "integer", paramType = "query", value = "Number of records per page."),
             @ApiImplicitParam(name = "sort", allowMultiple = true, dataType = "string", paramType = "query", value = "Sorting criteria in the format: property(,asc|desc). "
-                    + "Default sort order is ascending. " + "Multiple sort criteria are supported.") })
+                    + "Default sort order is ascending. " + "Multiple sort criteria are supported.")})
     public Page<DishDto> getClients(Pageable pageable) {
         logger.info("Returns all clients");
         return dishService.findAllDishs(pageable);
     }
 
     @ApiOperation(value = "Deletes client")
-    @DeleteMapping("/api/dish/{id}")
+    @DeleteMapping("/delete/{id}")
     public void deleteClient(@PathVariable String id) {
         dishService.deleteDish(id);
     }
 
     @ApiOperation(value = "Registers client")
-    @PostMapping("/api/disg")
+    @PostMapping("/create")
     public DishDto registerClient(@RequestBody DishDto dishDto) {
         return dishService.createDish(dishDto);
+    }
+
+    @ApiOperation(value = "Add dish to menu", notes = "Add dish to menu")
+    @PostMapping(value = "/{dishId}/add/{menuId}")
+    @ResponseStatus(HttpStatus.OK)
+    public void addProvider(@PathVariable("dishId") final String serviceName,
+                            @PathVariable("menuId") final Long providerName) {
+        dishService.addToMenu(serviceName, providerName);
+    }
+
+    @ApiOperation(value = "Delete dish from menu", notes = "Deletes dish from menu")
+    @DeleteMapping(value = "/{dishId}/delete/{menuId}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteProvider(@PathVariable("dishId") final String dishId,
+                               @PathVariable("menuId") final Long menuId) {
+        dishService.removeFromMenu(dishId, menuId);
     }
 }

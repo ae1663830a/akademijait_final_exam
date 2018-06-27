@@ -2,9 +2,8 @@ package lt.akademija.andrejo.domain;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Data
@@ -13,11 +12,17 @@ import javax.persistence.Table;
 @EqualsAndHashCode
 @ToString
 @Table(name = "dish")
-public class Dish {
+public class Dish implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     private String name;
     private boolean hasNuts;
     private boolean hasMilk;
+
+    @ManyToOne
+    @JoinColumn(name = "in_menu")
+    private Menu menu;
 
 }
