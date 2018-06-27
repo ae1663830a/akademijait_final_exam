@@ -27,40 +27,40 @@ class ServiceForm extends Component {
                 },
                 valid: false,
                 isTouched: false
-            }
-        },
-        hasNuts: {
-            elementType: 'select',
-            elementConfig: {
-                options: [
-                    {value: true, displayValue: 'YRA riešutų'},
-                    {value: false, displayValue: 'NĖRA riešutų'},
-                ]
             },
-            value: 'NO',
-            validation: {
-                required: true
+            hasNuts: {
+                elementType: 'select',
+                elementConfig: {
+                    options: [
+                        {value: true, displayValue: 'YRA riešutų'},
+                        {value: false, displayValue: 'NĖRA riešutų'},
+                    ]
+                },
+                value: 'NO',
+                validation: {
+                    required: true
+                },
+                valid: true,
+                isTouched: false
             },
-            valid: true,
-            isTouched: false
-        },
-        hasMilk: {
-            elementType: 'select',
-            elementConfig: {
-                options: [
-                    {value: true, displayValue: 'YRA pieno'},
-                    {value: false, displayValue: 'NERA pieno'},
+            hasMilk: {
+                elementType: 'select',
+                elementConfig: {
+                    options: [
+                        {value: true, displayValue: 'YRA pieno'},
+                        {value: false, displayValue: 'NERA pieno'},
 
-                ]
+                    ]
+                },
+                value: 'NO',
+                validation: {
+                    required: true
+                },
+                valid: true,
+                isTouched: false
             },
-            value: 'NO',
-            validation: {
-                required: true
-            },
-            valid: true,
-            isTouched: false
-        },
-        formIsValid: true
+            formIsValid: true
+        }
     };
 
     url = '/api/dishes/new';

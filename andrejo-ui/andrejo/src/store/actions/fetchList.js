@@ -52,8 +52,7 @@ export const fetchList = (url, pageSize) => {
 };
 export const changePageFetchList = (url, pageNumber, pageSize) => {
     return dispatch => {
-        const sort = '?sort=name%2Casc';
-        axios.get(url + sort, {params: {'page': pageNumber, 'size': pageSize}})
+        axios.get(url, {params: {'page': pageNumber, 'size': pageSize}})
             .then(response => {
                 const fetchList = response.data.content;
                 const totalPages = response.data.totalPages;
